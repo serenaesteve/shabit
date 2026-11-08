@@ -1,0 +1,42 @@
+-- Procedimientos almacenados de shabit. Se vuelven a crear cada vez que arranca el servidor.
+
+-- Los hábitos de una cuenta, en el orden de la pantalla Hoy.
+borrar procedimiento habitos_de si existe
+crear procedimiento habitos_de(cuenta) {
+  buscar habitos donde cuenta = :cuenta ordenar orden, id
+}
+
+-- Los meses de una cuenta desde uno dado ("2026-10"); con "0000-00", todos.
+borrar procedimiento meses_de si existe
+crear procedimiento meses_de(cuenta, desde) {
+  buscar meses donde cuenta = :cuenta y mes >= :desde mostrar habito, mes, marcas, progreso, notas, horas
+}
+
+-- Marca como hecho un día de un hábito (lo usan los Atajos). La fila del mes ya tiene que existir.
+borrar procedimiento marcar_hecho si existe
+crear procedimiento marcar_hecho(cuenta, habito, mes, dia, hora) {
+  actualizar meses poner marcas = extraer(marcas, 1, :dia - 1) & "H" & extraer(marcas, :dia + 1, 31 - :dia)
+    donde cuenta = :cuenta y habito = :habito y mes = :mes
+  actualizar cuentas poner version = version + 1, vista = ahora() donde id = :cuenta
+}
+
+-- Cifras para el panel: cuentas, activas y nuevas en los últimos 7 días.
+borrar procedimiento cifras si existe
+crear procedimiento cifras() {
+  buscar cuentas mostrar contar() como cuentas,
+    sumar(caso cuando vista > hace 7 dias entonces 1 sino 0 fin) como activas_7_dias,
+    sumar(caso cuando creada > hace 7 dias entonces 1 sino 0 fin) como nuevas_7_dias
+}
+
+-- Los hábitos más comunes entre todas las cuentas (sin decir de quién son).
+borrar procedimiento habitos_populares si existe
+crear procedimiento habitos_populares() {
+  buscar habitos donde archivado = falso agrupar minusculas(nombre)
+    mostrar minusculas(nombre) como habito, contar() como cuentas ordenar cuentas desc limite 10
+}
+
+-- Cuántos hábitos hay de cada tipo (simple, cantidad, tiempo, evitar), para el panel de cifras.
+borrar procedimiento habitos_por_tipo si existe
+crear procedimiento habitos_por_tipo() {
+  buscar habitos donde archivado = falso agrupar tipo mostrar tipo, contar() como habitos ordenar habitos desc
+}

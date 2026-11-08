@@ -1,0 +1,88 @@
+-- Esquema de shabit en SBD. Se puede aplicar las veces que haga falta («si no existe»).
+-- Para no llenar la memoria de SBD (cada fila ocupa ~1,8 KB), los días no van en una fila
+-- cada uno: cada fila de «meses» guarda un mes entero de un hábito, un carácter por día.
+
+crear tabla cuentas si no existe {
+  id        texto(16) clave              -- identificador anónimo, sin nombre ni email
+  huella    texto(64) obligatorio        -- sha256 del código secreto; el código no se guarda
+  version   entero = 1                   -- sube con cada cambio, para no pisar otro dispositivo
+  zona      texto(40) = "Europe/Madrid"
+  ajustes   texto                        -- tema y primer día de la semana, en JSON
+  creada    fechahora = ahora()
+  vista     fechahora = ahora()
+}
+
+crear tabla habitos si no existe {
+  cuenta    texto(16) obligatorio -> cuentas(id) al borrar cascada
+  id        entero obligatorio
+  nombre    texto(60) obligatorio
+  icono     texto(20)
+  momento   texto(12) = "cualquiera"     -- manana, tarde, noche o cualquiera
+  color     entero = 0
+  tipo      texto(10) = "simple"         -- simple, cantidad, tiempo o evitar (dejar algo)
+  cantidad  entero                       -- vasos, páginas… o minutos
+  unidad    texto(15)
+  objetivo  entero = 5                   -- días por semana
+  concretos texto(20)                    -- días concretos: "1,3,5" (0 = domingo)
+  por_mes   entero                       -- o bien: veces al mes
+  meta      entero = 66
+  pasos     entero
+  avisos    texto(20)                    -- horas de los recordatorios: "08:00,21:30"
+  pausas    texto                        -- [[desde, hasta]] en días; hasta nulo = sin fecha de vuelta
+  etiqueta  texto(20)                    -- salud, mente, ejercicio…
+  reto      entero                       -- si es un reto: cuántos días dura
+  inicio_reto entero                     -- día en que empezó el reto
+  creado    entero                       -- día de creación (días desde el 1-1-1970)
+  archivado logico = falso
+  orden     entero = 0
+  clave (cuenta, id)
+}
+
+crear tabla meses si no existe {
+  cuenta    texto(16) obligatorio
+  habito    entero obligatorio
+  mes       texto(7) obligatorio         -- "2026-11"
+  marcas    texto(31) obligatorio        -- H hecho, D descanso, R recaída, . sin marcar
+  progreso  texto                        -- {"día del mes": cantidad o segundos}, en JSON
+  notas     texto                        -- {"día del mes": "nota"}, en JSON
+  horas     texto                        -- {"día del mes": "21:04"}: a qué hora se marcó
+  clave (cuenta, habito, mes)
+  (cuenta, habito) -> habitos(cuenta, id) al borrar cascada
+}
+
+crear tabla animo si no existe {
+  cuenta    texto(16) obligatorio -> cuentas(id) al borrar cascada
+  mes       texto(7) obligatorio
+  niveles   texto(31) obligatorio        -- un dígito del 1 al 5 por día, «.» sin apuntar
+  notas     texto                        -- {"día del mes": "nota"}, en JSON
+  clave (cuenta, mes)
+}
+
+crear tabla suscripciones si no existe {
+  endpoint  texto(600) clave             -- dirección del servicio push del navegador
+  cuenta    texto(16) obligatorio -> cuentas(id) al borrar cascada
+  p256dh    texto(120) obligatorio
+  auth      texto(40) obligatorio
+  creada    fechahora = ahora()
+}
+
+crear tabla enviados si no existe {     -- avisos ya enviados hoy, para no repetirlos
+  cuenta    texto(16) clave -> cuentas(id) al borrar cascada
+  fecha     texto(10) obligatorio
+  ids       texto obligatorio              -- ["a:12:21:30", "resumen", "informe"]
+}
+
+crear tabla compartidos si no existe {  -- enlace de solo lectura para un compañero
+  token     texto(32) clave
+  cuenta    texto(16) obligatorio unico -> cuentas(id) al borrar cascada
+  creado    fechahora = ahora()
+}
+
+crear tabla atajos si no existe {       -- enlace para marcar un hábito desde Atajos o Siri
+  token     texto(32) clave
+  cuenta    texto(16) obligatorio
+  habito    entero obligatorio
+  creado    fechahora = ahora()
+  unico (cuenta, habito)
+  (cuenta, habito) -> habitos(cuenta, id) al borrar cascada
+}

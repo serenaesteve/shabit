@@ -1,0 +1,27 @@
+[Unit]
+Description=shabit: datos de la app en SBD y recordatorios (notificaciones push)
+After=network-online.target sbd.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=shabit
+Group=shabit
+WorkingDirectory=/srv/shabit-avisos/app
+Environment=PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1
+# Solo escucha en esta máquina; Apache le pasa /api/ desde https://shabit.serenaesteve.com.
+# Los datos están en el SBD de producción (127.0.0.1:8090), base «shabit».
+ExecStart=/usr/bin/python3 shabit.py --puerto 8102 --datos /srv/shabit-avisos/datos --sbd /srv/shabit-avisos/datos/sbd.json
+Restart=on-failure
+RestartSec=3
+MemoryMax=128M
+TasksMax=64
+# Endurecimiento: solo puede escribir en su carpeta de datos
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+ReadWritePaths=/srv/shabit-avisos/datos
+
+[Install]
+WantedBy=multi-user.target

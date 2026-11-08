@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>shabit · Tu rutina diaria de hábitos</title>
+  <meta name="description" content="Organiza tus hábitos por la mañana, la tarde y la noche, márcalos con un toque y mira crecer tus rachas. Con temporizador, contador, recordatorios y logros. Gratis, sin cuentas, en iPhone y Android.">
+  <meta name="theme-color" content="#F6F5F2">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="app/img/icono-180.png">
+  <link rel="canonical" href="https://shabit.serenaesteve.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://shabit.serenaesteve.com/">
+  <meta property="og:title" content="shabit · Tu rutina diaria de hábitos">
+  <meta property="og:description" content="Márcalos con un toque y mira crecer tus rachas. Gratis y sin cuentas.">
+  <meta property="og:image" content="https://shabit.serenaesteve.com/img/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preload" href="fuentes/nunito.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="estilos.css">
+  <script src="demo.js" defer></script>
+</head>
+<body>
+  <a class="saltar" href="#contenido">Saltar al contenido</a>
+
+  <header class="cabecera">
+    <a class="marca" href="./" aria-label="shabit, inicio"><img src="favicon.svg" width="32" height="32" alt="">shabit</a>
+    <nav aria-label="Secciones">
+      <a href="#funciona">Cómo funciona</a>
+      <a href="#instalar">Instalar</a>
+      <a href="#privacidad">Privacidad</a>
+    </nav>
+    <a class="boton boton--oscuro boton--peque" href="/app/">Abrir shabit</a>
+  </header>
+
+  <main id="contenido">
+    <section class="portada" aria-labelledby="titulo">
+      <div class="portada__texto">
+        <p class="etiqueta">Gratis · sin registro · iPhone y Android</p>
+        <h1 id="titulo">Tu rutina diaria, <span>un toque cada vez.</span></h1>
+        <p class="entradilla">Ordena tus hábitos por la mañana, la tarde y la noche. Cuando cumples uno, lo marcas con su botón redondo y tu racha crece. Así de simple.</p>
+        <div class="acciones">
+          <a class="boton boton--oscuro" href="/app/">Empezar ahora</a>
+          <a class="boton boton--claro" href="#instalar">Cómo instalarla</a>
+        </div>
+      </div>
+
+      <div class="demo" aria-labelledby="demo-titulo">
+        <div class="demo__cab">
+          <div><p class="demo__fecha" id="demo-fecha">Hoy</p><h2 id="demo-titulo">Pruébalo aquí</h2></div>
+          <div class="anillo" role="img" aria-label="Progreso del día" id="demo-anillo">
+            <svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="26" class="anillo__fondo"/><circle cx="32" cy="32" r="26" class="anillo__valor" transform="rotate(-90 32 32)"/></svg>
+            <span id="demo-cuenta">1/3</span>
+          </div>
+        </div>
+        <ul class="demo__lista">
+          <li class="habito" style="--c:#36A9E1;--c-suave:#e1f2fa">
+            <span class="insignia" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"/></svg></span>
+            <span class="habito__textos"><b>Beber agua</b><small>8 vasos al día</small></span>
+            <button class="check" aria-pressed="true" aria-label="Beber agua">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"/></svg></button>
+          </li>
+          <li class="habito" style="--c:#2FB9A7;--c-suave:#ddf4f1">
+            <span class="insignia" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="1"/><path d="m9 20 3-6 3 6M6 8l6 2 6-2M12 10v4"/></svg></span>
+            <span class="habito__textos"><b>Estirar</b><small>Por la mañana</small></span>
+            <button class="check" aria-pressed="false" aria-label="Estirar">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"/></svg></button>
+          </li>
+          <li class="habito" style="--c:#3D7FF2;--c-suave:#e2ecfd">
+            <span class="insignia" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg></span>
+            <span class="habito__textos"><b>Leer</b><small>20 minutos por la noche</small></span>
+            <button class="check" aria-pressed="false" aria-label="Leer">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"/></svg></button>
+          </li>
+        </ul>
+        <p class="demo__nota" id="demo-nota" aria-live="polite">Toca los botones redondos.</p>
+        <div class="confeti" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <section id="funciona" class="bloque" aria-labelledby="dia-t">
+      <figure class="movil"><img src="img/app-hoy.webp" width="720" height="1558" alt="Pantalla Hoy de shabit: la semana arriba, los pasos del día y los hábitos ordenados por mañana, tarde y noche, cada uno con su botón redondo." loading="lazy"></figure>
+      <div class="bloque__texto">
+        <p class="etiqueta">Tu día</p>
+        <h2 id="dia-t">Todo lo de hoy, en orden</h2>
+        <ul class="puntos">
+          <li><b>Por momentos del día.</b> Mañana, tarde, noche o cuando sea: cada hábito aparece cuando te toca.</li>
+          <li><b>Un toque para marcarlo.</b> Y si te equivocas, «Deshacer». Al tocar la tarjeta tienes todas las opciones.</li>
+          <li><b>La semana arriba.</b> ¿Se te olvidó apuntar ayer? Toca el día y márcalo.</li>
+          <li><b>Días de descanso.</b> Un día malo no rompe tu racha: márcalo como descanso.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="bloque bloque--espejo" aria-labelledby="contar-t">
+      <figure class="movil"><img src="img/app-crono.webp" width="720" height="1558" alt="Un hábito de lectura con el temporizador en marcha y la barra de Pausar y Terminar." loading="lazy"></figure>
+      <div class="bloque__texto">
+        <p class="etiqueta">A tu manera</p>
+        <h2 id="contar-t">Cuenta lo que haces como quieras</h2>
+        <ul class="tipos">
+          <li style="--c:#36A9E1"><b>Cantidad</b><span>8 vasos de agua: cada toque suma uno.</span></li>
+          <li style="--c:#3D7FF2"><b>Tiempo</b><span>Leer 20 minutos con temporizador; al acabar, hecho.</span></li>
+          <li style="--c:#3FB06A"><b>Pasos</b><span>Caminar 8.000 pasos y se marca solo.</span></li>
+          <li style="--c:#EF6351"><b>Días concretos</b><span>Gimnasio lunes, miércoles y viernes; el resto no cuenta.</span></li>
+          <li style="--c:#E8A33D"><b>Veces al mes</b><span>Llamar a la abuela dos veces al mes, sin día fijo.</span></li>
+          <li style="--c:#9B6BDF"><b>Dejar algo</b><span>Sin azúcar o sin fumar: cada día sin hacerlo suma solo.</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="bloque" aria-labelledby="progreso-t">
+      <figure class="movil"><img src="img/app-progreso.webp" width="720" height="1558" alt="Pantalla Progreso: barras de la semana, el ánimo de los últimos días y los logros conseguidos." loading="lazy"></figure>
+      <div class="bloque__texto">
+        <p class="etiqueta">Motivación</p>
+        <h2 id="progreso-t">Mira cómo vas y celébralo</h2>
+        <ul class="puntos">
+          <li><b>Rachas y días completos.</b> Cuando cumples todo lo del día, shabit lo celebra contigo.</li>
+          <li><b>Retos y logros.</b> 30 días sin azúcar, tu primera semana seguida, cien días hechos…</li>
+          <li><b>Tu año de un vistazo.</b> Un mapa con cada día, tu mejor día de la semana y un informe para guardar en PDF.</li>
+          <li><b>Un compañero.</b> Comparte un enlace para que alguien vea cómo vas y te anime. Sin tus notas.</li>
+          <li><b>Cómo te sientes.</b> Apunta tu ánimo y una nota del día, y descubre si tus hábitos te sientan bien.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="bloque bloque--espejo" aria-labelledby="rutinas-t">
+      <figure class="movil"><img src="img/app-rutinas.webp" width="720" height="1558" alt="Pantalla de rutinas listas para añadir: Mañana con energía y Dormir mejor." loading="lazy"></figure>
+      <div class="bloque__texto">
+        <p class="etiqueta">Para empezar rápido</p>
+        <h2 id="rutinas-t">Rutinas listas en un toque</h2>
+        <p class="texto">Añade varios hábitos de golpe y luego cámbialos a tu gusto.</p>
+        <ul class="rutinas">
+          <li><b>Mañana con energía</b><span>Agua, estirar y desayunar sin prisa</span></li>
+          <li><b>Dormir mejor</b><span>Dejar el móvil, leer y acostarse antes</span></li>
+          <li><b>Moverme más</b><span>Caminar, beber agua y hacer ejercicio</span></li>
+          <li><b>Mente tranquila</b><span>Meditar, escribir y agradecer</span></li>
+        </ul>
+        <p class="texto"><b>Y recordatorios:</b> hasta tres horas por hábito, y shabit te avisa solo si aún no lo has hecho. Si quieres, un resumen por la mañana y cómo ha ido tu semana el domingo.</p>
+        <p class="texto"><b>Con Atajos del iPhone:</b> marca un hábito desde Siri o un atajo, sin abrir la app.</p>
+      </div>
+    </section>
+
+    <section id="instalar" class="instalar" aria-labelledby="instalar-t">
+      <h2 id="instalar-t">Instálala en tu móvil</h2>
+      <p class="texto">shabit es una app web: se instala desde el navegador, sin tiendas, y funciona sin conexión.</p>
+      <div class="instalar__columnas">
+        <div class="tarjeta">
+          <h3>iPhone</h3>
+          <ol>
+            <li>Abre <a href="/app/">shabit.serenaesteve.com/app</a> en <b>Safari</b>.</li>
+            <li>Toca <b>Compartir</b> (el cuadrado con la flecha).</li>
+            <li>Elige <b>Añadir a pantalla de inicio</b>.</li>
+            <li>Ábrela desde su icono. Así puede avisarte y tus datos quedan a salvo.</li>
+          </ol>
+          <p class="nota">iOS 16.4 o superior para los recordatorios.</p>
+        </div>
+        <div class="tarjeta">
+          <h3>Android</h3>
+          <ol>
+            <li>Abre <a href="/app/">shabit.serenaesteve.com/app</a> en <b>Chrome</b>.</li>
+            <li>Toca el menú <b>⋮</b> de arriba a la derecha.</li>
+            <li>Elige <b>Instalar aplicación</b> (o «Añadir a pantalla de inicio»).</li>
+            <li>Ya la tienes con su icono, como cualquier app.</li>
+          </ol>
+        </div>
+      </div>
+      <a class="boton boton--oscuro" href="/app/">Abrir shabit</a>
+    </section>
+
+    <section id="privacidad" class="privacidad" aria-labelledby="privacidad-t">
+      <h2 id="privacidad-t">Tus hábitos, a salvo y sin cuentas</h2>
+      <p class="texto">No hay registro, ni email, ni publicidad. Tus hábitos, tus días y tus notas se guardan en tu móvil y en <b>SBD</b>, la base de datos de shabit, ligados a un código anónimo. Así funciona sin conexión y no pierdes nada si cambias de móvil: con ese código los recuperas en otro.</p>
+      <p class="texto">Para los recordatorios, el servidor mira en SBD la hora de cada aviso y si ya lo has hecho. Desde Ajustes puedes borrar tus datos del servidor cuando quieras: se quedan solo en tu móvil.</p>
+    </section>
+  </main>
+
+  <footer class="pie">
+    <p><img src="favicon.svg" width="20" height="20" alt=""> shabit · hecha por <a href="https://serenaesteve.com">Serena Esteve</a></p>
+  </footer>
+</body>
+</html>
